@@ -1,6 +1,6 @@
 import { prepareServer } from "./app/server.js";
 
-const app = prepareServer()
+const app = prepareServer() // prepare a server with reasonable defaults
 
 const { PORT } = process.env
 
