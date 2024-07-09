@@ -4,6 +4,9 @@ Small script to perform operations against the address book service
 
 ## Dependencies
 
+- go 1.22
+- k6 0.49
+
 ## How to run
 
 ## Hardware / Results
