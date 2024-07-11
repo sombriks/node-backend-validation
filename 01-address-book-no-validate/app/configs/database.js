@@ -23,7 +23,7 @@ let connection;
 export const prepareDatabase = async (config = defaultDatabaseConfig) => {
 	// https://github.com/sombriks/pglite/tree/main?tab=readme-ov-file#limitations
 	if (!connection || connection.closed) {
-		connection = new PGlite(config.dataDir);
+		connection = new PGlite(config.dataDir, {debug: 0});
 		const {rows: [{result}]} = await connection.query('select 1 + 1 as result');
 		if (result != '2') {
 			throw new Error('database issue');

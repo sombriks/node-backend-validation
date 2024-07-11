@@ -13,8 +13,15 @@ export const preparePeopleRequests = async options => {
 			context.body = await peopleServices.list(q);
 		},
 		async find(context) {},
-		async insert(context) {},
+		async create(context) {},
 		async update(context) {},
 		async del(context) {},
+		phones: {
+			async list(context) {},
+			async find(context) {},
+			async create(context) {},
+			async update(context) {},
+			async del(context) {},
+		},
 	};
 };

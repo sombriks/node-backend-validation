@@ -11,7 +11,7 @@ export const prepareAddressesRequests = async options => {
 		async find(context) {
 			context.body = await service.find(context.request.params);
 		},
-		async insert(context) {
+		async create(context) {
 			const id = await service.create({address: context.request.body});
 			context.status(201);
 			context.location = `/addresses/${id}`;
