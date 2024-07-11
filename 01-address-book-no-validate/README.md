@@ -58,13 +58,18 @@ npm run test:coverage
 - Setup a Koa service is like build a custom motorbike, you can either end with
   a 55cc toy motorcycle or a real-life Kaneda's bike from Akira movie.
 - Ava is blazing fast
-- XO makes lint a pleasure
+- XO makes lint a pleasure, but sometimes the 'fixes' changes meaning.
 - Supertest for Koa middleware is a marriage in heaven
-- PGLite is staging here to see if it can replace sqlite as test database.
+- PGLite is staging here to see if it can replace [sqlite][sqlite] as test
+  database. It is in early stages, has [some limitations][limitations] but
+  promising so far.
 - The configs/requests/services and provisioning functions is a portable style
   being experimented here as well. Some stacks offers DI containers, others
   doesn't. So it's a good practice keep a sane, straightforward setup phase with
   reasonable configuration functions instead of singleton exports.
+- Kind reminder that async/await are contagious. I needed it early, for
+  database, then it propagated to services and from services to controllers,
+  making server setup async/await land as well.
 
 [node]: https://nodejs.org
 [koa]: https://koajs.com
@@ -81,3 +86,5 @@ npm run test:coverage
 [ava]: <https://www.npmjs.com/package/ava>
 [c8]: <https://www.npmjs.com/package/c8>
 [supertest]: <https://www.npmjs.com/package/supertest>
+[sqlite]: https://sqlite.org
+[limitations]: https://github.com/electric-sql/pglite?tab=readme-ov-file#limitations

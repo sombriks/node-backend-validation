@@ -35,5 +35,31 @@
     "nodemon": "^3.1.4",
     "supertest": "^7.0.0",
     "xo": "^0.58.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "ava": {
+    "verbose": true,
+    "require": [
+      "dotenv-flow/config"
+    ]
+  },
+  "c8": {
+    "exclude": [
+      "**/*.spec.js"
+    ]
+  },
+  "xo": {
+    "rules": {
+      "eqeqeq": "warn",
+      "new-cap": "warn",
+      "camelcase": "warn",
+      "no-return-assign": "warn",
+      "no-await-in-loop": "warn",
+      "no-warning-comments": "warn",
+      "n/prefer-global/process": "warn",
+      "unicorn/prefer-top-level-await": "warn"
+    }
   }
 }
