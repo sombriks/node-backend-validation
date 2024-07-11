@@ -1,10 +1,9 @@
 import {readFileSync} from 'node:fs';
-import {PGlite} from '@electric-sql/pglite';
 
 /**
  * Apply database migrations
  *
- * @param {PGlite} database database connection instance
+ * @param {import('@electric-sql/pglite')} database database connection instance
  */
 export const noRollback = async database => {
 	console.log('check database desired state/migrations...');
