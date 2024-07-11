@@ -1,6 +1,6 @@
 --
 -- base tables
--- 
+--
 -- addresses in the book
 create table addresses(
   id serial primary key,
@@ -20,8 +20,8 @@ create table people(
 create table addresses_people(
   addresses_id integer not null,
   people_id integer not null,
-  foreign key (addresses_id) references addresses(id),
-  foreign key (people_id) references people(id),
+  foreign key (addresses_id) references addresses(id) on delete cascade,
+  foreign key (people_id) references people(id) on delete cascade,
   primary key (addresses_id, people_id)
 );
 -- people might have more than one phone number, but any number belongs to someone
@@ -32,5 +32,5 @@ create table phones(
   -- no number belongs to two distinct people
   created timestamp not null default now(),
   updated timestamp not null default now(),
-  foreign key (people_id) references people(id)
+  foreign key (people_id) references people(id) on delete cascade
 );

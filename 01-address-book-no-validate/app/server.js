@@ -17,7 +17,7 @@ export const prepareServer = async options => {
 		.path('/addresses', b => {
 			b.get('', addressesRequests.list);
 			b.post('', addressesRequests.create);
-			b.path(':id', b => {
+			b.path('/:id', b => {
 				b.get('', addressesRequests.find);
 				b.put('', addressesRequests.update);
 				b.del('', addressesRequests.del);
@@ -26,14 +26,14 @@ export const prepareServer = async options => {
 		.path('/people', b => {
 			b.get('', peopleRequests.list);
 			b.post('', peopleRequests.create);
-			b.path(':id', b => {
+			b.path('/:id', b => {
 				b.get('', peopleRequests.find);
 				b.put('', peopleRequests.update);
 				b.del('', peopleRequests.del);
 				b.path('/phones', b => {
 					b.get('', peopleRequests.phones.list);
 					b.post('', peopleRequests.phones.create);
-					b.path(':phones_id', b => {
+					b.path('/:phones_id', b => {
 						b.get('', peopleRequests.phones.find);
 						b.put('', peopleRequests.phones.update);
 						b.del('', peopleRequests.phones.del);

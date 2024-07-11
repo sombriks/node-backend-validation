@@ -21,6 +21,7 @@ export const noRollback = async database => {
 		files.push('app/configs/migrations/3000-test-data.sql');
 	}
 
+	const result = {executed: [], status: 'success'};
 	for await (const file of files) {
 		await database.transaction(async tx => {
 			const migrate = readFileSync(file, 'utf8');
@@ -37,10 +38,11 @@ export const noRollback = async database => {
 				await tx.exec(migrate);
 				console.log('done!');
 				await tx.query('insert into no_rollback_from_here (path) values ($1)', [file]);
+				result.executed.push(file);
 			}
 		});
 	}
 
 	console.log('done with database checking!');
-	return 'success'; // TODO migrate report
+	return result;
 };

@@ -32,6 +32,7 @@ test('should insert address', async t => {
 	const address = {description: 'El Dorado Rd 113', complement: ''};
 	const id = await t.context.addressesService.create({address});
 	t.truthy(id);
+	t.false(isNaN(id));
 });
 
 test('should update address', async t => {

@@ -9,6 +9,7 @@ import {preparePeopleRequests} from './people.js';
 import {prepareAddressesRequests} from './addresses.js';
 
 test.before(async t => {
+	// TODO setup too similar along specs
 	const database = await prepareDatabase();
 
 	const addressesService = await prepareAddressesServices({db: database});
@@ -35,13 +36,36 @@ test('should list addresses', async t => {
 	t.true(Array.isArray(result.body));
 });
 
-test('should find address', async t => {});
-test('should create addresses', async t => {});
-test('should update addresses', async t => {});
-test('should delete addresses', async t => {});
+test('should find address', async t => {
+	const result = await request(t.context.app.callback()).get('/addresses/1');
+	t.truthy(result);
+	t.is(result.status, 200);
+	t.truthy(result.body);
+	t.regex(result.text, /road 01/gi);
+});
 
-test('should list people', async t => {});
-test('should find people', async t => {});
-test('should create people', async t => {});
-test('should update people', async t => {});
-test('should delete people', async t => {});
+test('should create addresses', async t => {
+	t.pass('but not implemented yet!');
+});
+test('should update addresses', async t => {
+	t.pass('but not implemented yet!');
+});
+test('should delete addresses', async t => {
+	t.pass('but not implemented yet!');
+});
+
+test('should list people', async t => {
+	t.pass('but not implemented yet!');
+});
+test('should find people', async t => {
+	t.pass('but not implemented yet!');
+});
+test('should create people', async t => {
+	t.pass('but not implemented yet!');
+});
+test('should update people', async t => {
+	t.pass('but not implemented yet!');
+});
+test('should delete people', async t => {
+	t.pass('but not implemented yet!');
+});

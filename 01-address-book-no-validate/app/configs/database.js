@@ -25,11 +25,12 @@ export const prepareDatabase = async (config = defaultDatabaseConfig) => {
 	if (!connection || connection.closed) {
 		connection = new PGlite(config.dataDir, {debug: 0});
 		const {rows: [{result}]} = await connection.query('select 1 + 1 as result');
-		if (result != '2') {
+		if (result !== 2) {
 			throw new Error('database issue');
 		}
 
-		await noRollback(connection);
+		const migrate = await noRollback(connection);
+		console.log(migrate);
 	}
 
 	return connection;

@@ -18,8 +18,8 @@ export const preparePhonesServices = async options => {
 			return rows;
 		},
 		async find({id = -1}) {},
-		async create({ }) {},
-		async update({ }) {},
-		async del({ }) {},
+		async create({phone}) {},
+		async update({id, phone}) {},
+		async del({id}) {},
 	};
 };
