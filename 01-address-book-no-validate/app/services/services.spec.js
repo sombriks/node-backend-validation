@@ -16,7 +16,8 @@ test.after.always(async t => {
 	await t.context.database.close();
 });
 
-test('should list addresses', async t => {
+// Sampling how to skip a test
+test.skip('should list addresses', async t => {
 	const result = await t.context.addressesService.list({q: ''});
 	t.true(Array.isArray(result));
 	t.truthy(result.find(a => a.description.includes('Horses alley')));
@@ -32,7 +33,7 @@ test('should insert address', async t => {
 	const address = {description: 'El Dorado Rd 113', complement: ''};
 	const id = await t.context.addressesService.create({address});
 	t.truthy(id);
-	t.false(isNaN(id));
+	t.false(Number.isNaN(id));
 });
 
 test('should update address', async t => {

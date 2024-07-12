@@ -9,33 +9,31 @@ export const preparePeopleRequests = async options => {
 	const {peopleServices, phonesServices} = options;
 	return {
 		async list(context) {
-			const {q = ''} = context.request.query;
-			context.body = await peopleServices.list(q);
+			context.body = await peopleServices.list(context.request.query);
 		},
 		async find(context) {
-			const {id = -1} = context.request.params;
-			context.body = await peopleServices.find({id});
+			context.body = await peopleServices.find(context.request.params);
 		},
 		async create(context) {
 			const person = context.request.body;
 			const id = await peopleServices.create({person});
-			context.status(201);
-			context.location = `/people/${id}`;
+			context.status = 201;
+			context.set('Location', `/people/${id}`);
 			context.body = {message: `#${id} created`};
 		},
 		async update(context) {
 			const {id} = context.request.params;
 			const {body: person} = context.request;
 			const affected = await peopleServices.update({id, person});
-			context.status(303);
-			context.location = `/people/${id}`;
+			context.status = 303;
+			context.set('Location', `/people/${id}`);
 			context.body = {message: `${affected} updated`};
 		},
 		async del(context) {
 			const {id} = context.request.params;
 			const affected = await peopleServices.del({id});
-			context.status(303);
-			context.location = '/people';
+			context.status = 303;
+			context.set('Location', '/people');
 			context.body = {message: `${affected} deleted`};
 		},
 		phones: {

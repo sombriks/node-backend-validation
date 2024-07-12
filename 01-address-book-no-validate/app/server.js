@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
 import ApiBuilder from 'koa-api-builder';
 import {prepareAddressesRequests} from './controllers/addresses.js';
 import {preparePeopleRequests} from './controllers/people.js';
@@ -45,6 +46,7 @@ export const prepareServer = async options => {
 
 	// Registering middlewares. the order is very important.
 	const app = new Koa();
+	app.use(bodyParser());
 	app.use(router.routes());
 	app.use(router.allowedMethods());
 

@@ -13,22 +13,22 @@ export const prepareAddressesRequests = async options => {
 		},
 		async create(context) {
 			const id = await service.create({address: context.request.body});
-			context.status(201);
-			context.location = `/addresses/${id}`; // Politely guide clients to somewhere else
+			context.status = 201;
+			context.set('Location', `/addresses/${id}`); // Politely guide clients to somewhere else
 			context.body = {message: `#${id} created`};
 		},
 		async update(context) {
 			const {id} = context.params;
 			const {body: address} = context.request;
 			const affected = await service.update({id, address});
-			context.status(303); // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303
-			context.location = `/addresses/${id}`;
+			context.status = 303; // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303
+			context.set('Location', `/addresses/${id}`);
 			context.body = {message: `${affected} updated`};
 		},
 		async del(context) {
 			const affected = await service.del(context.request.params);
-			context.status(303);
-			context.location = '/addresses';
+			context.status = 303;
+			context.set('Location', '/addresses');
 			context.body = {message: `${affected} deleted`};
 		},
 	};

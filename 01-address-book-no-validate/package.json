@@ -7,6 +7,7 @@
   "scripts": {
     "lint": "xo --fix app",
     "start": "node -r dotenv-flow/config index.js",
+    "test": "cross-env NODE_ENV=test ava app",
     "test:coverage": "cross-env NODE_ENV=test c8 ava app",
     "dev": "cross-env NODE_ENV=development nodemon -r dotenv-flow/config"
   },
@@ -56,6 +57,7 @@
       "new-cap": "warn",
       "camelcase": "warn",
       "no-return-assign": "warn",
+      "ava/no-skip-test": "warn",
       "no-await-in-loop": "warn",
       "no-warning-comments": "warn",
       "n/prefer-global/process": "warn",
