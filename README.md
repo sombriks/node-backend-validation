@@ -36,8 +36,8 @@ types to help input data validation at compile time.
 
 ## Noteworthy
 
-- There is also a small benchmark project using [k6][k6] putting the API under
-  performance stress test so we can observe the consequences of each approach.
+- There is also a small benchmark project using [k6][k6], putting the API under
+  performance stress test, so we can observe the consequences of each approach.
 -
 
 [repo]: https://github.com/sombriks/node-backend-validation

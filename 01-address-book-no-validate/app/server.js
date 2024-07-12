@@ -22,6 +22,13 @@ export const prepareServer = async options => {
 				b.get('', addressesRequests.find);
 				b.put('', addressesRequests.update);
 				b.del('', addressesRequests.del);
+				b.path('/people', b => {
+					b.get('', addressesRequests.people.list);
+					b.path('/:people_id', b => {
+						b.put('', addressesRequests.people.add);
+						b.del('', addressesRequests.people.del);
+					})
+				})
 			});
 		})
 		.path('/people', b => {

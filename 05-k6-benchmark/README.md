@@ -9,4 +9,8 @@ Small script to perform operations against the address book service
 
 ## How to run
 
+```bash
+k6 run
+```
+
 ## Hardware / Results

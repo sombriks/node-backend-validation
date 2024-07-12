@@ -10,7 +10,7 @@ export const testSetup = async t => {
 	const database = await prepareDatabase();
 
 	const addressesServices = await prepareAddressesServices({db: database});
-	const addressesRequests = await prepareAddressesRequests({service: addressesServices});
+	const addressesRequests = await prepareAddressesRequests({addressesServices});
 
 	const peopleServices = await preparePeopleServices({db: database});
 	const phonesServices = await preparePhonesServices({db: database});

@@ -53,23 +53,31 @@ npm run dev
 npm run test:coverage
 ```
 
+Check out [the][spec-app] [test][spec-service] [suites][spec-controller] for
+details.
+
 ## Noteworthy
 
 - Setup a Koa service is like build a custom motorbike, you can either end with
   a 55cc toy motorcycle or a real-life Kaneda's bike from Akira movie.
 - Ava is blazing fast
 - XO makes lint a pleasure, but sometimes the 'fixes' changes meaning.
-- Supertest for Koa middleware is a marriage in heaven
+- Supertest with Koa is a marriage made in heaven, koa exposes a pure node-ish
+  callback and supertest handles the rest.
 - PGLite is staging here to see if it can replace [sqlite][sqlite] as test
   database. It is in early stages, has [some limitations][limitations] but
   promising so far.
-- The configs/requests/services and provisioning functions is a portable style
-  being experimented here as well. Some stacks offers DI containers, others
+- The configs/controllers/services and provisioning functions is a good portable
+  style being experimented here as well. Some stacks has DI containers, others
   doesn't. So it's a good practice keep a sane, straightforward setup phase with
   reasonable configuration functions instead of singleton exports.
 - Kind reminder that async/await are contagious. I needed it early, for
   database, then it propagated to services and from services to controllers,
   making server setup async/await land as well.
+- In this example project we had tests at service and controller modules. it's
+  overengineering for the sake of the example. Unless testing specific scenarios
+  narrowing down business details, no need to cover services, since controllers
+  will cover them as well, given enough test cases.
 
 [node]: https://nodejs.org
 [koa]: https://koajs.com
@@ -88,3 +96,6 @@ npm run test:coverage
 [supertest]: <https://www.npmjs.com/package/supertest>
 [sqlite]: https://sqlite.org
 [limitations]: https://github.com/electric-sql/pglite?tab=readme-ov-file#limitations
+[spec-app]: ./app/app.spec.js
+[spec-service]: ./app/services/services.spec.js
+[spec-controller]: ./app/controllers/controllers.spec.js

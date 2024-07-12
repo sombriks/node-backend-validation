@@ -48,6 +48,30 @@ test('should delete addresses', async t => {
 	t.regex(result.text, /1 deleted/gi);
 });
 
+test('should list people living in address', async t => {
+	const result = await request(t.context.app.callback()).get('/addresses/1/people');
+	t.truthy(result);
+	t.is(result.status, 200);
+	t.true(Array.isArray(result.body));
+	t.is(result.body.length, 2);
+})
+
+test('should add people into address', async t => {
+	const result = await request(t.context.app.callback()).put('/addresses/4/people/1');
+	t.truthy(result);
+	t.is(result.status, 303);
+	t.regex(result.headers.location, /\/addresses\/4\/people/);
+	t.regex(result.text, /1 added/gi);
+});
+
+test('should remove people from address', async t => {
+	const result = await request(t.context.app.callback()).del('/addresses/2/people/3');
+	t.truthy(result);
+	t.is(result.status, 303);
+	t.regex(result.headers.location, /\/addresses\/2\/people/);
+	t.regex(result.text, /1 removed/gi);
+});
+
 test('should list people', async t => {
 	const result = await request(t.context.app.callback()).get('/people');
 	t.truthy(result);
