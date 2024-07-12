@@ -17,7 +17,7 @@ export const noRollback = async database => {
 	await database.exec(metadata);
 	// Add new migrate files here, in this array.
 	const files = ['app/configs/migrations/2024-07-09-start-schema.sql'];
-	if (process.env.NODE_ENV == 'test') {
+	if (process.env.NODE_ENV === 'test') {
 		files.push('app/configs/migrations/3000-test-data.sql');
 	}
 

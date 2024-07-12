@@ -55,12 +55,12 @@
     "rules": {
       "eqeqeq": "warn",
       "new-cap": "warn",
-      "camelcase": "warn",
-      "no-return-assign": "warn",
+      "camelcase": "off",
+      "no-return-assign": "off",
       "ava/no-skip-test": "warn",
       "no-await-in-loop": "warn",
       "no-warning-comments": "warn",
-      "n/prefer-global/process": "warn",
+      "n/prefer-global/process": "off",
       "unicorn/prefer-top-level-await": "warn"
     }
   }

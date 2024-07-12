@@ -1,20 +1,9 @@
 import test from 'ava';
-import {prepareDatabase} from '../configs/database.js';
-import {prepareAddressesServices} from './addresses.js';
-import {preparePeopleServices} from './people.js';
-import {preparePhonesServices} from './phones.js';
+import {testSetup, testTeardown} from '../configs/hook-test-context.js';
 
-test.before(async t => {
-	const database = await prepareDatabase();
-	t.context.database = database;
-	t.context.addressesService = await prepareAddressesServices({db: database});
-	t.context.peopleService = await preparePeopleServices({db: database});
-	t.context.phoneService = await preparePhonesServices({db: database});
-});
+test.before(testSetup);
 
-test.after.always(async t => {
-	await t.context.database.close();
-});
+test.after.always(testTeardown);
 
 // Sampling how to skip a test
 test.skip('should list addresses', async t => {
@@ -48,11 +37,11 @@ test('should delete address', async t => {
 });
 
 test('should list people', async t => {
-	const result = await t.context.peopleService.list({q: ''});
+	const result = await t.context.peopleServices.list({q: ''});
 	t.true(Array.isArray(result));
 });
 
 test('should list phones', async t => {
-	const result = await t.context.phoneService.list({q: ''});
+	const result = await t.context.phonesServices.list({q: ''});
 	t.true(Array.isArray(result));
 });
