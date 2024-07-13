@@ -29,19 +29,27 @@ test.
 - [c8][c8] 10.1
 - [supertest][supertest] 7.0
 
+The following commands can provision the npm project skeleton:
+
 ```bash
 npm init -y 
 npm i koa @koa/cors koa-jwt @koa/router koa-api-builder koa-bodyparser
 npm i @electric-sql/pglite cross-env dotenv-flow
 npm i -D nodemon xo c8 ava supertest
-mkdir -p app/{configs,requests,services}
-touch .env .env.development .env.test index.js app/server.js 
-touch app/configs/{database.js,cross-origin.js,security.js}
-touch app/requests/{addresses.js,people.js}
-touch app/services/{addresses.js,people.js,phones.js}
+mkdir -p app/{configs/migrations,controllers,services}
+touch .env .env.development .env.test index.js app/{app.spec.js,server.js} 
+touch app/configs/{cross-origin.js,database.js,security.js} 
+touch app/configs/{hook-test-context.js,no-rollback.js}
+touch app/configs/migrations/{2024-07-09-start-schema.sql,3000-test-data.sql}
+touch app/controllers/{controllers.spec.js,addresses.js,people.js}
+touch app/services/{services.spec.js,addresses.js,people.js,phones.js}
 ```
 
 ## How to build
+
+Since this project is pure javascript, there is no real build phase except for
+dependencies download. This also why primary folder containing the scripts is
+called `app` instead of `src`:
 
 ```bash
 npm i
@@ -66,24 +74,29 @@ details.
 
 - Setup a Koa service is like build a custom motorbike, you can either end with
   a 55cc toy motorcycle or a real-life Kaneda's bike from Akira movie.
-- Ava is blazing fast
-- XO makes lint a pleasure, but sometimes the 'fixes' changes meaning.
+- Ava is blazing fast.
+- XO makes (es)linting a pleasure, but sometimes the 'fixes' changes meaning.
 - Supertest with Koa is a marriage made in heaven, koa exposes a pure node-ish
   callback and supertest handles the rest.
 - PGLite is staging here to see if it can replace [sqlite][sqlite] as test
   database. It is in early stages, has [some limitations][limitations] but
-  promising so far.
+  promising so far. Makes me happy because we can test without depend on docker.
 - The configs/controllers/services and provisioning functions is a good portable
   style being experimented here as well. Some stacks has DI containers, others
   doesn't. So it's a good practice keep a sane, straightforward setup phase with
-  reasonable configuration functions instead of singleton exports.
+  reasonable configuration functions and defaults instead of singleton exports.
 - Kind reminder that async/await are contagious. I needed it early, for
   database, then it propagated to services and from services to controllers,
-  making server setup async/await land as well.
-- In this example project we had tests at service and controller modules. it's
-  overengineering for the sake of the example. Unless testing specific scenarios
-  narrowing down business details, no need to cover services, since controllers
-  will cover them as well, given enough test cases.
+  making not only server setup but entire project async/await land as well.
+- In this example project we had tests at service and controller modules. It's
+  overengineering, it was done just for the sake of the examples. Unless we get
+  specific testing scenarios narrowing down business details, no need to cover
+  services _directly_, since tests for controllers will cover them as well,
+  given enough test cases.
+- The [no-rollback.js][no-rollback] script is a minimalistic migration solution
+  with potential, but it's too naive and probably not suited for production. But
+  it delivers what is needed for a study project and might get its own
+  repository in the future.
 
 [node]: https://nodejs.org
 [koa]: https://koajs.com
@@ -105,3 +118,4 @@ details.
 [spec-app]: ./app/app.spec.js
 [spec-service]: ./app/services/services.spec.js
 [spec-controller]: ./app/controllers/controllers.spec.js
+[no-rollback]: ./app/configs/no-rollback.js

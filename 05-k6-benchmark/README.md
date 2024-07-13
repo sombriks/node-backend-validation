@@ -18,11 +18,12 @@ k6 run scenario-01.js
 
 ## Hardware / Scenario / Results
 
-All tests executed with initially empty database
+All tests executed with initially empty database.
 
-| compute    | scenario        | no validation | manual validation | joi | ts-node |
-|------------|-----------------|---------------|-------------------|-----|---------|
-| Mac M1 Air | 01 / 30s / 10vu | 3447 reqs     |                   |     |         |
+| Compute             | Scenario        | No Validation | Manual Validation | Joi | TS-Node |
+|---------------------|-----------------|---------------|-------------------|-----|---------|
+| Mac M1 Air          | 01 / 30s / 10vu | 3447 reqs     |                   |     |         |
+| Intel Core i7-1255U | 01 / 30s / 10vu | 1463 reqs     |                   |     |         |
 
 [go]: https://go.dev
 [k6]: https://grafana.com/docs/k6/latest/using-k6/http-requests

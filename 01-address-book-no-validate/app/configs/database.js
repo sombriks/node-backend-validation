@@ -3,11 +3,6 @@ import {PGlite} from '@electric-sql/pglite';
 import {noRollback} from './no-rollback.js';
 
 /**
- * Default config for database
- */
-const defaultDatabaseConfig = {dataDir: process.env.PG_DATA};
-
-/**
  * @type {PGlite} database - ref to connection singleton
  */
 let connection;
@@ -20,7 +15,9 @@ let connection;
  *
  * @returns {Promise<PGlite>} valid database connection instance
  */
-export const prepareDatabase = async (config = defaultDatabaseConfig) => {
+export const prepareDatabase = async config => {
+	// Config fallback
+	config ||= {dataDir: process.env.PG_DATA};
 	// https://github.com/sombriks/pglite/tree/main?tab=readme-ov-file#limitations
 	if (!connection || connection.closed) {
 		connection = new PGlite(config.dataDir, {debug: 0});

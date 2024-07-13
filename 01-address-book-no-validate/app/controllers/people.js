@@ -13,8 +13,11 @@ export const preparePeopleRequests = async options => {
 		},
 		async find(context) {
 			const result = await peopleServices.find(context.request.params);
-			if (!result) context.throw(404, 'Not Found');
-			else context.body = result
+			if (result) {
+				context.body = result;
+			} else {
+				context.throw(404, 'Not Found');
+			}
 		},
 		async create(context) {
 			const person = context.request.body;
@@ -47,8 +50,11 @@ export const preparePeopleRequests = async options => {
 			async find(context) {
 				const {id: people_id, phones_id} = context.request.params;
 				const result = await phonesServices.find({people_id, phones_id});
-				if (!result) context.throw(404, 'Not Found');
-				else context.body = result
+				if (result) {
+					context.body = result;
+				} else {
+					context.throw(404, 'Not Found');
+				}
 			},
 			async create(context) {
 				const {id: people_id} = context.request.params;
