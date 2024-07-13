@@ -23,7 +23,7 @@ All tests executed with initially empty database.
 | Compute             | Scenario        | No Validation | Manual Validation | Joi | TS-Node |
 |---------------------|-----------------|---------------|-------------------|-----|---------|
 | Mac M1 Air          | 01 / 30s / 10vu | 3447 reqs     |                   |     |         |
-| Intel Core i7-1255U | 01 / 30s / 10vu | 1463 reqs     |                   |     |         |
+| Intel Core i7-1255U | 01 / 30s / 10vu | 1463 reqs     | 1773 reqs         |     |         |
 
 [go]: https://go.dev
 [k6]: https://grafana.com/docs/k6/latest/using-k6/http-requests

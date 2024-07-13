@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import {check} from 'k6';
+import { check } from 'k6';
 
 // See https://grafana.com/docs/k6/latest/examples/get-started-with-k6/
 export const options = {
@@ -33,12 +33,12 @@ export default function () {
   delete payload.complement
   const r3 = http.post('http://0.0.0.0:3000/addresses', payload);
   check(r3, {
-    '500 did not create': r => r.status === 500,
+    '500 did not create / 400 missing complement': r => r.status === 500 || r.status === 400,
   })
 
   // find failure.
   const r4 = http.get('http://0.0.0.0:3000/addresses/-1');
   check(r4, {
-    '404 not found': r => r.status === 404,
+    '404 not found / 400 invalid id': r => r.status === 404 || r.status === 400,
   })
 }

@@ -45,13 +45,21 @@ test('should NOT find address', async t => {
 	t.is(result.status, 404);
 });
 
-test('should create addresses', async t => {
+test('should create address', async t => {
 	const address = {description: 'El Dorado Rd 113', complement: ''};
 	const result = await request(t.context.app.callback()).post('/addresses').send(address);
 	t.truthy(result);
 	t.is(result.status, 201);
 	t.regex(result.headers.location, /\/addresses\/\d+/gi);
 	t.regex(result.text, /created/gi);
+});
+
+test('should NOT create address due to invalid complement', async t => {
+	const address = {description: 'El Dorado Rd 113' /* complement: '' */};
+	const result = await request(t.context.app.callback()).post('/addresses').send(address);
+	t.truthy(result);
+	t.is(result.status, 400);
+	t.regex(result.text, /invalid address complement/gi);
 });
 
 test('should update addresses', async t => {

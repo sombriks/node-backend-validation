@@ -8,6 +8,7 @@ const start = async () => {
 
   const { PORT } = process.env
 
+  log.info(`NODE_ENV is ${process.env.NODE_ENV || 'production'}`)
   app.listen(PORT, () => log.info('http://0.0.0.0:' + PORT))
   // open to business
 }
