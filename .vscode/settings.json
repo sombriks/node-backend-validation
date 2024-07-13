@@ -1,5 +1,6 @@
 {
   "npm.enableRunFromFolder": true,
+  "npm.enableScriptExplorer": true,
   "cSpell.words": [
     "overengineering",
     "reqs"
