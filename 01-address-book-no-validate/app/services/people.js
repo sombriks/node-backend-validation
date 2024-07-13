@@ -15,7 +15,7 @@ export const preparePeopleServices = async options => {
 				select * from people 
 				where id = $1`, [id]);
 			if (!rows || rows.length === 0) {
-				return undefined;
+				return null;
 			}
 
 			return rows[0];

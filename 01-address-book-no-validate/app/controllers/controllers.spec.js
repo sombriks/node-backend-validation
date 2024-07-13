@@ -14,12 +14,35 @@ test('should list addresses', async t => {
 	t.truthy(result.body.find(a => a.description.includes('Horses alley')));
 });
 
+test('should search addresses - single result', async t => {
+	const result = await request(t.context.app.callback()).get('/addresses?q=horse');
+	t.truthy(result);
+	t.is(result.status, 200);
+	t.true(Array.isArray(result.body));
+	t.is(result.body.length, 1);
+	t.truthy(result.body.find(a => a.description.includes('Horses alley')));
+});
+
+test('should search addresses - empty list', async t => {
+	const result = await request(t.context.app.callback()).get('/addresses?q=route%2066');
+	t.truthy(result);
+	t.is(result.status, 200);
+	t.true(Array.isArray(result.body));
+	t.is(result.body.length, 0);
+});
+
 test('should find address', async t => {
 	const result = await request(t.context.app.callback()).get('/addresses/1');
 	t.truthy(result);
 	t.is(result.status, 200);
 	t.truthy(result.body);
 	t.regex(result.text, /road 01/gi);
+});
+
+test('should NOT find address', async t => {
+	const result = await request(t.context.app.callback()).get('/addresses/-1');
+	t.truthy(result);
+	t.is(result.status, 404);
 });
 
 test('should create addresses', async t => {
@@ -54,7 +77,7 @@ test('should list people living in address', async t => {
 	t.is(result.status, 200);
 	t.true(Array.isArray(result.body));
 	t.is(result.body.length, 2);
-})
+});
 
 test('should add people into address', async t => {
 	const result = await request(t.context.app.callback()).put('/addresses/4/people/1');

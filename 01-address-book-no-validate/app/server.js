@@ -27,8 +27,8 @@ export const prepareServer = async options => {
 					b.path('/:people_id', b => {
 						b.put('', addressesRequests.people.add);
 						b.del('', addressesRequests.people.del);
-					})
-				})
+					});
+				});
 			});
 		})
 		.path('/people', b => {

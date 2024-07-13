@@ -27,7 +27,7 @@ export const preparePhonesServices = async options => {
           where people_id = $1
             and id = $2`, [people_id, phones_id]);
 			if (!rows || rows.length === 0) {
-				return undefined;
+				return null;
 			}
 
 			return rows[0];

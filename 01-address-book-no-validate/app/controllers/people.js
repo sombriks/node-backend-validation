@@ -12,7 +12,9 @@ export const preparePeopleRequests = async options => {
 			context.body = await peopleServices.list(context.request.query);
 		},
 		async find(context) {
-			context.body = await peopleServices.find(context.request.params);
+			const result = await peopleServices.find(context.request.params);
+			if (!result) context.throw(404, 'Not Found');
+			else context.body = result
 		},
 		async create(context) {
 			const person = context.request.body;
@@ -44,7 +46,9 @@ export const preparePeopleRequests = async options => {
 			},
 			async find(context) {
 				const {id: people_id, phones_id} = context.request.params;
-				context.body = await phonesServices.find({people_id, phones_id});
+				const result = await phonesServices.find({people_id, phones_id});
+				if (!result) context.throw(404, 'Not Found');
+				else context.body = result
 			},
 			async create(context) {
 				const {id: people_id} = context.request.params;

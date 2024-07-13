@@ -9,7 +9,9 @@ export const prepareAddressesRequests = async options => {
       context.body = await addressesServices.list(context.request.query);
     },
     async find(context) {
-      context.body = await addressesServices.find(context.request.params);
+      const result = await addressesServices.find(context.request.params);
+      if (!result) context.throw(404, 'Not Found');
+      else context.body = result
     },
     async create(context) {
       const id = await addressesServices.create({address: context.request.body});

@@ -1,6 +1,12 @@
 # Address book service - no validation at application level
 
-This project demonstrates why we should validate user input.
+This project demonstrates why we should validate user input by validating no
+input received from requests.
+
+All requests hits the database and only then service returns results.
+
+It is meant so serve as benchmark for the other projects when put under stress
+test.
 
 ## Dependencies
 
