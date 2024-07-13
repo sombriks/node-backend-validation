@@ -1,5 +1,7 @@
 # [node-backend-validation][repo]
 
+[![CI tests](https://github.com/sombriks/node-backend-validation/actions/workflows/ci.yml/badge.svg)](https://github.com/sombriks/node-backend-validation/actions/workflows/ci.yml)
+
 Samples on how to validate user data in node
 
 ## Why validate input
