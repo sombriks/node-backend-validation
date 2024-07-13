@@ -22,7 +22,7 @@ All tests executed with initially empty database.
 
 | Compute             | Scenario        | No Validation | Manual Validation | Joi | TS-Node |
 |---------------------|-----------------|---------------|-------------------|-----|---------|
-| Mac M1 Air          | 01 / 30s / 10vu | 3447 reqs     |                   |     |         |
+| Mac M1 Air          | 01 / 30s / 10vu | 3447 reqs     | 2684 reqs         |     |         |
 | Intel Core i7-1255U | 01 / 30s / 10vu | 1463 reqs     | 1773 reqs         |     |         |
 
 [go]: https://go.dev
