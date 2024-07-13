@@ -44,7 +44,7 @@ touch app/services/{services.spec.js,addresses.js,people.js,phones.js}
 ## How to build
 
 Since this project is pure javascript, there is no real build phase except for
-dependencies download. This also why primary folder containing the scripts is
+dependencies download. This is also why primary folder containing the scripts is
 called `app` instead of `src`:
 
 ```bash
@@ -68,6 +68,36 @@ npm run test:coverage
 - Check same section from [previous project][proj01]. Both uses the same stack
   with little differences.
 - In this example we added [signale][signale] for better service logging.
+- The disadvantage of explicit validation is the noise introduced in the code:
+
+  ```javascript
+  // app/controllers/addresses.js
+  // ...
+  async create(context) {
+    log.info('create address');
+    const {description, complement} = context.request.body;
+    if (!description) {
+      log.warn('invalid address description');
+      return context.throw(400, 'invalid address description');
+    }
+
+    if (complement === null || complement === undefined) {
+      log.warn('invalid address complement');
+      return context.throw(400, 'invalid address complement');
+    }
+
+    const id = await addressesServices.create({address: {description, complement}});
+    context.status = 201;
+    context.set('Location', `/addresses/${id}`); // Politely guide clients to somewhere else
+    context.body = {message: `#${id} created`};
+  }
+  // ...
+  ```
+
+  We added in-place validation for just two attributes in our controller and it
+  more than doubled in size.
+- This migration system example tries to go forward and optimize a few things.
+  Better logging and a lock strategy during migrations are a few improvements.
 
 [node]: https://nodejs.org
 [koa]: https://koajs.com

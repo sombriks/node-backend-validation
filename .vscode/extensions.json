@@ -1,5 +1,6 @@
 {
   "recommendations": [
-    "kristjantammekivi.npm-utils"
+    "kristjantammekivi.npm-utils",
+    "sycl.markdown-command-runner"
   ]
 }

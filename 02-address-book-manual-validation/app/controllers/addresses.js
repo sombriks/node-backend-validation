@@ -1,6 +1,7 @@
 import {prepareAddressesServices} from '../services/addresses.js';
 import {logger} from '../configs/logging.js';
 
+// Define a scope so you can better track from where the log message came from
 const log = logger.scope('controllers', 'addresses.js');
 
 export const prepareAddressesRequests = async options => {
@@ -10,7 +11,6 @@ export const prepareAddressesRequests = async options => {
 		async list(context) {
 			log.info('list addresses');
 			const {q = ''} = context.request.query;
-			// Deliberately letting parameters hit the service without care
 			context.body = await addressesServices.list({q});
 		},
 		async find(context) {

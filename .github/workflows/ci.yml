@@ -12,7 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - run: |
+        with:
+          node-version-file: package.json
+      - name: Run tests
+        run: |
           npm ci
           npm run test:coverage
   run-tests-example-02:
@@ -23,7 +26,37 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - run: |
+        with:
+          node-version-file: package.json
+      - name: Run tests
+        run: |
           npm ci
           npm run test:coverage
-
+  run-tests-example-03:
+    defaults:
+      run:
+        working-directory: 03-address-book-joi
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+      - name: Run tests
+        run: |
+          npm ci
+          npm run test:coverage
+  run-tests-example-04:
+    defaults:
+      run:
+        working-directory: 04-address-book-ts-node
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+      - name: Run tests
+        run: |
+          npm ci
+          npm run test:coverage

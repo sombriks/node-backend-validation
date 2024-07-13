@@ -48,7 +48,7 @@ touch app/services/{services.spec.js,addresses.js,people.js,phones.js}
 ## How to build
 
 Since this project is pure javascript, there is no real build phase except for
-dependencies download. This also why primary folder containing the scripts is
+dependencies download. This is also why primary folder containing the scripts is
 called `app` instead of `src`:
 
 ```bash
