@@ -4,7 +4,26 @@ on:
   push:
     branches: ["*"]
 jobs:
-  run-tests:
+  run-tests-example-01:
+    defaults:
+      run:
+        working-directory: 01-address-book-no-validate
     runs-on: ubuntu-latest
     steps:
-      - run: echo "TBD"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: |
+          npm ci
+          npm run test:coverage
+  run-tests-example-02:
+    defaults:
+      run:
+        working-directory: 02-address-book-manual-validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: |
+          npm ci
+          npm run test:coverage
+
