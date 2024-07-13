@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
+          node-version-file: 01-address-book-no-validate/package.json
       - name: Run tests
         run: |
           npm ci
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
+          node-version-file: 02-address-book-manual-validation/package.json
       - name: Run tests
         run: |
           npm ci
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
+          node-version-file: 03-address-book-joi/package.json
       - name: Run tests
         run: |
           npm ci
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
+          node-version-file: 04-address-book-ts-node/package.json
       - name: Run tests
         run: |
           npm ci
