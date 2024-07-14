@@ -45,14 +45,36 @@ npm i -D @types/supertest
 npx tsc --init
 touch index.ts .env .env.development .env.test
 mkdir -p app/{configs/migrations,controllers,models,services}
-touch 
+touch app/{server.ts,app.spec.ts}
+touch app/configs/{cross-origin.ts,database.ts,logging.ts,no-rollback.ts,security.ts}
+touch app/configs/migrations/{2024-07-14-start-schema.sql,3000-test-data.sql}
+touch app/controllers/{addresses.ts,people.ts,controllers.spec.ts}
+touch app/models/{address.ts,person.ts,phone.ts}
+touch app/services/{addresses.ts,people.ts,phones.ts,services.spec.ts}
 ```
 
 ## Build
 
+Usually typescript projects has a build step. But ts-node, however, can perform
+the type-checkings at runtime as well, which is something we want for our case
+study here. This is why the source code, once again, goes into a folder called
+`app` instead of `src`. Just install dependencies:
+
+```bash
+npm i
+```
+
 ## Run
 
+```bash
+npm run dev
+```
+
 ## Test
+
+```bash
+npm run test:coverage
+```
 
 ## Noteworthy
 
@@ -67,8 +89,8 @@ touch
 - `tsconfig.json` seems to be entirely optional, but we generated one (with the
   usual `npx tsc --init`) just to make clear that this is a
   [typescript][typescript] project.
-- ava requires [a small configuration][ts-ava] to proper work with ts-node, but
-  besides that everything just works, [c8][c8] coverage tool included.
+- [ava][ava] requires [a small configuration][ts-ava] to properly work with
+  ts-node, besides that everything just works, [c8][c8] coverage tool included.
 - The [xo][xo] linter just works, only demanding a few tweaks on rules, since
   it detects automatically that the project has typescript.
 - Although typescript is usually compiled (to javascript!), ts-node skips that

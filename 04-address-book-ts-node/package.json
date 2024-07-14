@@ -79,6 +79,7 @@
       "no-warning-comments": "warn",
       "n/prefer-global/process": "off",
       "unicorn/prefer-top-level-await": "warn",
+      "@typescript-eslint/member-ordering": "warn",
       "@typescript-eslint/restrict-template-expressions": "warn"
     }
   }
