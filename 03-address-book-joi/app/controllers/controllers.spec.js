@@ -1,6 +1,6 @@
 import test from 'ava';
 import request from 'supertest';
-import {testSetup, testTeardown} from '../configs/hook-test-context.js';
+import { testSetup, testTeardown } from '../configs/hook-test-context.js';
 
 test.before(testSetup);
 
@@ -46,7 +46,7 @@ test('should NOT find address', async t => {
 });
 
 test('should create address', async t => {
-	const address = {description: 'El Dorado Rd 113', complement: ''};
+	const address = { description: 'El Dorado Rd 113', complement: '' };
 	const result = await request(t.context.app.callback()).post('/addresses').send(address);
 	t.truthy(result);
 	t.is(result.status, 201);
@@ -55,15 +55,15 @@ test('should create address', async t => {
 });
 
 test('should NOT create address due to invalid complement', async t => {
-	const address = {description: 'El Dorado Rd 113' /* complement: '' */};
+	const address = { description: 'El Dorado Rd 113' /* complement: '' */ };
 	const result = await request(t.context.app.callback()).post('/addresses').send(address);
 	t.truthy(result);
 	t.is(result.status, 400);
-	t.regex(result.text, /invalid address complement/gi);
+	t.regex(result.text, /"complement" is required/gi);
 });
 
 test('should update addresses', async t => {
-	const address = {description: 'Dead end street', complement: 'Uphill house'};
+	const address = { description: 'Dead end street', complement: 'Uphill house' };
 	const result = await request(t.context.app.callback()).put('/addresses/2').send(address);
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -91,7 +91,7 @@ test('should NOT list people due to invalid address', async t => {
 	const result = await request(t.context.app.callback()).get('/addresses/-1/people');
 	t.truthy(result);
 	t.is(result.status, 400);
-	t.regex(result.text, /id -1 is invalid/gi);
+	t.regex(result.text, /id is invalid/gi);
 });
 
 test('should add people into address', async t => {
@@ -127,7 +127,7 @@ test('should find a person', async t => {
 });
 
 test('should create people', async t => {
-	const person = {name: 'Ferdinand'};
+	const person = { name: 'Ferdinand' };
 	const result = await request(t.context.app.callback()).post('/people').send(person);
 	t.truthy(result);
 	t.is(result.status, 201);
@@ -136,7 +136,7 @@ test('should create people', async t => {
 });
 
 test('should update people', async t => {
-	const person = {name: 'Donald'};
+	const person = { name: 'Donald' };
 	const result = await request(t.context.app.callback()).put('/people/4').send(person);
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -169,7 +169,7 @@ test('should find people\'s phones', async t => {
 });
 
 test('should create people\'s phone', async t => {
-	const phone = {number: '55555'};
+	const phone = { number: '55555' };
 	const result = await request(t.context.app.callback()).post('/people/5/phones').send(phone);
 	t.truthy(result);
 	t.is(result.status, 201);
@@ -179,7 +179,7 @@ test('should create people\'s phone', async t => {
 });
 
 test('should update people\'s phone', async t => {
-	const phone = {number: '77771111'};
+	const phone = { number: '77771111' };
 	const result = await request(t.context.app.callback()).put('/people/5/phones/3').send(phone);
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -188,7 +188,7 @@ test('should update people\'s phone', async t => {
 });
 
 test('should delete people\'s phone', async t => {
-	const phone = {number: '77771111'};
+	const phone = { number: '77771111' };
 	const result = await request(t.context.app.callback()).del('/people/2/phones/2').send(phone);
 	t.truthy(result);
 	t.is(result.status, 303);

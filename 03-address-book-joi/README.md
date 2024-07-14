@@ -66,8 +66,10 @@ npm run test:coverage
 
 ## Noteworthy
 
-- Check same section from [previous project][proj02]. Both uses the same stack
+- Check same section from [previous project][proj02]. Both share the same stack
   with little differences.
+- [Joi][joi] is indeed a joy to use. Define a schema for your payload, call
+  validate inside a middleware and the job is done.
 
 [node]: https://nodejs.org
 [koa]: https://koajs.com

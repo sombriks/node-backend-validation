@@ -4,7 +4,7 @@ import ApiBuilder from 'koa-api-builder';
 import { prepareAddressesRequests } from './controllers/addresses.js';
 import { preparePeopleRequests } from './controllers/people.js';
 import { logger } from './configs/logging.js';
-import { ifValidAddress } from './configs/validation.js';
+import { ifValidAddress, ifValidId } from './configs/validation.js';
 
 const log = logger.scope('server.js');
 
@@ -28,7 +28,7 @@ export const prepareServer = async options => {
 				b.put('', addressesRequests.update);
 				b.del('', addressesRequests.del);
 				b.path('/people', b => {
-					b.get('', addressesRequests.people.list);
+					b.get('', ifValidId, addressesRequests.people.list);
 					b.path('/:people_id', b => {
 						b.put('', addressesRequests.people.add);
 						b.del('', addressesRequests.people.del);
