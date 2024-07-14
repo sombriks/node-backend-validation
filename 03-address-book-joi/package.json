@@ -1,10 +1,15 @@
 {
   "name": "03-address-book-joi",
+  "type": "module",
   "version": "1.0.0",
   "description": "In this example we use a popular validation framework to cope with invalid requests.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "xo --fix app",
+    "start": "node -r dotenv-flow/config index.js",
+    "test": "cross-env NODE_ENV=test ava app",
+    "test:coverage": "cross-env NODE_ENV=test c8 ava app",
+    "dev": "cross-env NODE_ENV=development nodemon -r dotenv-flow/config"
   },
   "keywords": [],
   "author": "",
@@ -28,5 +33,32 @@
     "nodemon": "^3.1.4",
     "supertest": "^7.0.0",
     "xo": "^0.58.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "ava": {
+    "verbose": true,
+    "require": [
+      "dotenv-flow/config"
+    ]
+  },
+  "c8": {
+    "exclude": [
+      "**/*.spec.js"
+    ]
+  },
+  "xo": {
+    "rules": {
+      "eqeqeq": "warn",
+      "new-cap": "warn",
+      "camelcase": "off",
+      "no-return-assign": "off",
+      "ava/no-skip-test": "warn",
+      "no-await-in-loop": "warn",
+      "no-warning-comments": "warn",
+      "n/prefer-global/process": "off",
+      "unicorn/prefer-top-level-await": "warn"
+    }
   }
 }

@@ -35,7 +35,7 @@ npm i @electric-sql/pglite cross-env dotenv-flow signale joi
 npm i -D nodemon xo c8 ava supertest
 mkdir -p app/{configs/migrations,controllers,services}
 touch .env .env.development .env.test index.js app/{app.spec.js,server.js} 
-touch app/configs/{cross-origin.js,database.js,security.js,logging.js} 
+touch app/configs/{cross-origin.js,database.js,security.js,logging.js,validation.js} 
 touch app/configs/{hook-test-context.js,no-rollback.js}
 touch app/configs/migrations/{2024-07-13-start-schema.sql,3000-test-data.sql}
 touch app/controllers/{controllers.spec.js,addresses.js,people.js}
