@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/koa-bodyparser": "^4.3.12"
+  }
+}

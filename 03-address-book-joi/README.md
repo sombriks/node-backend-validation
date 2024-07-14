@@ -69,7 +69,15 @@ npm run test:coverage
 - Check same section from [previous project][proj02]. Both share the same stack
   with little differences.
 - [Joi][joi] is indeed a joy to use. Define a schema for your payload, call
-  validate inside a middleware and the job is done.
+  validate inside a middleware and the job is done. You even get a fancy
+  validation message, out of the box.
+- The use of middlewares (`ifValidAddress` and `ifValidId` for instance) cleans
+  up our requests and thanks to the [api builder][koa-api-builder] we mount them
+  in our request pipeline with little friction. Depending of the project size,
+  validation deserves a dedicated folder instead of dwell along other
+  configurations. Joi schemas and middlewares in a validation or model folder,
+  if you are that old. That leads to a talk about architecture design and good
+  practices but it's topic for another moment.
 
 [node]: https://nodejs.org
 [koa]: https://koajs.com

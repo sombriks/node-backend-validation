@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "description": "In this example we use a popular validation framework to cope with invalid requests.",
+  "engines": {
+    "node": ">=20"
+  },
   "main": "index.js",
   "scripts": {
     "lint": "xo --fix app",
@@ -11,9 +14,15 @@
     "test:coverage": "cross-env NODE_ENV=test c8 ava app",
     "dev": "cross-env NODE_ENV=development nodemon -r dotenv-flow/config"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "koa",
+    "pglite",
+    "ava",
+    "supertest",
+    "validation"
+  ],
+  "author": "Leonardo Silveira <sombriks@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@electric-sql/pglite": "^0.1.5",
     "@koa/cors": "^5.0.0",
@@ -33,9 +42,6 @@
     "nodemon": "^3.1.4",
     "supertest": "^7.0.0",
     "xo": "^0.58.0"
-  },
-  "engines": {
-    "node": ">=20"
   },
   "ava": {
     "verbose": true,
