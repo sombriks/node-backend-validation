@@ -1,10 +1,9 @@
-import Koa from 'koa'
-import { Context } from 'koa'
+import Koa, {type Context} from 'koa';
 
-export const app: Koa = new Koa()
+export const app: Koa = new Koa();
 
-app.use(async (ctx: Context) => {
-  const {name} = ctx.request.query
-  const n1: string = <string>ctx.request.query.n1
-  ctx.body = `Hello, ${name}, the number is ${10 - parseInt(n1)}`
-})
+app.use(async (context: Context) => {
+	const {name} = context.request.query;
+	const n1: string = context.request.query.n1 as string;
+	context.body = `Hello, ${name}, the number is ${10 - Number.parseInt(n1)}`;
+});
