@@ -61,8 +61,10 @@ to type hints.
 
 - There is also a [small benchmark project][05] using [k6][k6], putting the API
   under stress test, so we can observe the consequences of each approach.
-- There is coverage for all projects, but for some reason some of them report
-  wrong line numbers.
+- There is coverage for all projects, but for some unknown reason, some of them
+  report wrong line numbers, shifted by one or two.
+- Typescript gymnastics is tiresome and project tooling is passing through
+  transformation or i just got bad luck.
 
 [repo]: https://github.com/sombriks/node-backend-validation
 [node]: https://nodejs.org
