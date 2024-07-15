@@ -39,7 +39,7 @@ npm init -y
 npm i typescript ts-node cross-env dotenv-flow
 npm i @electric-sql/pglite signale
 npm i koa @koa/cors @koa/router koa-api-builder koa-bodyparser koa-jwt
-npm i @types/koa @types/koa-cors @types/koa-jwt @types/koa-router @types/signale
+npm i @types/koa @types/koa-bodyparser @types/koa-cors @types/koa-jwt @types/koa-router @types/signale
 npm i -D ava c8 nodemon supertest xo
 npm i -D @types/supertest
 npx tsc --init
@@ -78,14 +78,17 @@ npm run test:coverage
 
 ## Noteworthy
 
+    Build is broken due incompatibility between ts-node and esm-only packages.
+    Specifically, 
+
 - With type checking enabled via ts-node, typescript becomes what it really
   should be: a first-class statically type-checked language with erros at
-  compile time and runtime:
+  compile-time and runtime:
   ![static type checking](docs/static-type-checking.png)
 - On the other hand, we had to set node module type to "commonjs". All previous
   projects are using modern node module type resolution. But typescript itself
   still uses `import` instead of `require` by default, so the overall DX is the
-  same. Not a future-proof solution, but get the job done.
+  same. Not a future-proof solution, but gets the job done.
 - `tsconfig.json` seems to be entirely optional, but we generated one (with the
   usual `npx tsc --init`) just to make clear that this is a
   [typescript][typescript] project.
@@ -94,7 +97,16 @@ npm run test:coverage
 - The [xo][xo] linter just works, only demanding a few tweaks on rules, since
   it detects automatically that the project has typescript.
 - Although typescript is usually compiled (to javascript!), ts-node skips that
-  and we don't have a dist/build/bin directory. We don't need.
+  and we don't have a dist/build/bin directory. We don't need them. And once
+  again the project does not showcase an `src` folder.
+- Some type validations included in xo/eslint seems too strict, so the list of
+  disabled checks in this project is bigger than the list in others. One could
+  say to avoid turn off lint options, but some of them are just too pedantic.
+  Also this is a small sample project, no need to be so strict.
+- The [api builder][koa-api-builder] is a pure commonjs package; i had to put
+  an ignore flag on it so ts-node would tolerate it not offering any type info.
+- I am still figuring out how to use PGlite with ts-node. Besides that, project
+  structure sounds solid.
 
 [node]: https://nodejs.org
 [typescript]: https://typescriptlang.org/

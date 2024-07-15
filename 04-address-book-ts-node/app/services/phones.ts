@@ -23,7 +23,7 @@ export type PhoneServices = {
 	del(p: PhoneParameters): Promise<number>;
 };
 
-export const preparePhonesServices = async (options: PhonesServicesOptions): Promise<PhoneServices> => {
+export const preparePhonesServices = async (options?: PhonesServicesOptions): Promise<PhoneServices> => {
 	options ||= {db: await prepareDatabase()};
 	const {db} = options;
 	return {

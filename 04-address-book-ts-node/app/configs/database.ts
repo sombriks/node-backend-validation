@@ -18,11 +18,12 @@ export const prepareDatabase = async (config?: DatabaseConfig): Promise<PGlite> 
 		connection = new PGlite(config.dataDir, {debug: 0});
 		const {rows: [{result}]} = await connection.query<{result: number}>('select 1 + 1 as result');
 		if (result !== 2) {
+			log.error('database issue');
 			throw new Error('database issue');
 		}
 
 		const migrate = await noRollback(connection);
-		console.log(migrate);
+		log.info(migrate);
 	}
 
 	return connection;

@@ -20,7 +20,7 @@ export type PeopleServices = {
 	del(p: PersonParameters): Promise<number>;
 };
 
-export const preparePeopleServices = async (options: PeopleServicesOptions): Promise<PeopleServices> => {
+export const preparePeopleServices = async (options?: PeopleServicesOptions): Promise<PeopleServices> => {
 	options ||= {db: await prepareDatabase()}; // XXX this idiom looks promising
 	const {db} = options;
 	return {

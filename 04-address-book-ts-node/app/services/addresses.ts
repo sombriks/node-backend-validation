@@ -31,7 +31,7 @@ export type AddressesServices = {
 	};
 };
 
-export const prepareAddressesServices = async (options: AddressesServicesOptions): Promise<AddressesServices> => {
+export const prepareAddressesServices = async (options?: AddressesServicesOptions): Promise<AddressesServices> => {
 	options ||= {db: await prepareDatabase()};
 	const {db} = options;
 	return {
