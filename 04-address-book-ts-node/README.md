@@ -8,6 +8,7 @@ already seen so far about validation.
 - [node][node] 20.14
 - [typescript][typescript] 5.5
 - [ts-node][ts-node] 10.9
+- [tsx][tsx] 4.16 (fallback, facing issues with ts-node)
 - [koa][koa] 2.15
 - [koa-jwt][koa-jwt] 4.0
 - [@koa/cors][koa-cors] 5.0
@@ -36,7 +37,7 @@ however the [Developer Experience][dx] is greatly improved by them.
 
 ```bash
 npm init -y
-npm i typescript ts-node cross-env dotenv-flow
+npm i typescript ts-node tsx cross-env dotenv-flow
 npm i @electric-sql/pglite signale
 npm i koa @koa/cors @koa/router koa-api-builder koa-bodyparser koa-jwt
 npm i @types/koa @types/koa-bodyparser @types/koa-cors @types/koa-jwt @types/koa-router @types/signale
@@ -66,8 +67,10 @@ npm i
 
 ## Run
 
+We're using the `tsx` variante untill ts-node gets fixed:
+
 ```bash
-npm run dev
+npm run dev:tsx
 ```
 
 ## Test
@@ -78,8 +81,12 @@ npm run test:coverage
 
 ## Noteworthy
 
-    Build is broken due incompatibility between ts-node and esm-only packages.
-    Specifically, 
+    Build with ts-node is broken due to incompatibility between ts-node and
+    esm-only packages. Specifically, PGlite does not cope well with the mix of
+    typescript and commonjs-style node projects.
+
+    But using tsx instead of ts-node seems to solve the issue, but we sacrifice
+    runtime checks by using it.
 
 - With type checking enabled via ts-node, typescript becomes what it really
   should be: a first-class statically type-checked language with erros at
@@ -92,7 +99,7 @@ npm run test:coverage
 - `tsconfig.json` seems to be entirely optional, but we generated one (with the
   usual `npx tsc --init`) just to make clear that this is a
   [typescript][typescript] project.
-- [ava][ava] requires [a small configuration][ts-ava] to properly work with
+- [ava][ava] requires [a small configuration][ts-node-ava] to properly work with
   ts-node, besides that everything just works, [c8][c8] coverage tool included.
 - The [xo][xo] linter just works, only demanding a few tweaks on rules, since
   it detects automatically that the project has typescript.
@@ -103,14 +110,23 @@ npm run test:coverage
   disabled checks in this project is bigger than the list in others. One could
   say to avoid turn off lint options, but some of them are just too pedantic.
   Also this is a small sample project, no need to be so strict.
-- The [api builder][koa-api-builder] is a pure commonjs package; i had to put
+- The [api builder][koa-api-builder] is a pure commonjs package; we had to put
   an ignore flag on it so ts-node would tolerate it not offering any type info.
-- I am still figuring out how to use PGlite with ts-node. Besides that, project
-  structure sounds solid.
+  Also another bad side-effect was the introduction of several `any` types in
+  the builder usage. 
+- Using [tsx][tsx] instead of ts-node results in a faster setup by sacrificing
+  runtime checks. It's kinda go against the purpose of this study, but it's good
+  to know how to put things to work.
+- Additionally, [ava setup][tsx-ava] must be changed to remove ts-node setup and
+  add [tsx configuration][tsx-import]. See ava section in package.json for more
+  details.
+- One must be wise when installing library types. Install the wrong type might
+  result in incredible waste of time.
 
 [node]: https://nodejs.org
 [typescript]: https://typescriptlang.org/
 [ts-node]: https://typestrong.org/ts-node/
+[tsx]: https://tsx.is/getting-started
 [koa]: https://koajs.com
 [koa-jwt]: https://www.npmjs.com/package/koa-jwt
 [koa-cors]: https://www.npmjs.com/package/@koa/cors
@@ -128,4 +144,6 @@ npm run test:coverage
 [supertest]: <https://www.npmjs.com/package/supertest>
 [ts-types]: https://definitelytyped.org/
 [dx]: https://about.gitlab.com/topics/devops/what-is-developer-experience/
-[ts-ava]: <https://typestrong.org/ts-node/docs/recipes/ava>
+[ts-node-ava]: <https://typestrong.org/ts-node/docs/recipes/ava>
+[tsx-ava]: https://github.com/avajs/ava/blob/main/docs/06-configuration.md
+[tsx-import]: https://tsx.is/node/#global-enhancement

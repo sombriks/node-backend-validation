@@ -19,13 +19,19 @@ export const testSetup = async (t: ExecutionContext) => {
 
 	const app = await prepareServer({addressesRequests, peopleRequests});
 
+	// @ts-expect-error properly type context later
 	t.context.addressesService = addressesServices;
+	// @ts-expect-error properly type context later
 	t.context.peopleServices = peopleServices;
+	// @ts-expect-error properly type context later
 	t.context.phonesServices = phonesServices;
+	// @ts-expect-error properly type context later
 	t.context.database = database;
+	// @ts-expect-error properly type context later
 	t.context.app = app;
 };
 
 export const testTeardown = async (t: ExecutionContext) => {
+	// @ts-expect-error properly type context later
 	await t.context.database.close();
 };

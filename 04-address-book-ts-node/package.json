@@ -8,7 +8,9 @@
   "main": "index",
   "scripts": {
     "start": "ts-node -r dotenv-flow/config index.ts",
+    "start:tsx": "tsx -r dotenv-flow/config index.ts",
     "dev": "cross-env NODE_ENV=development nodemon -x ts-node -e ts -r dotenv-flow/config index.ts",
+    "dev:tsx": "cross-env NODE_ENV=development nodemon -x tsx -e ts -r dotenv-flow/config index.ts",
     "test": "cross-env NODE_ENV=test ava app",
     "test:coverage": "cross-env NODE_ENV=test c8 ava app",
     "lint": "xo --fix app"
@@ -20,7 +22,8 @@
     "supertest",
     "validation",
     "typescript",
-    "ts-node"
+    "ts-node",
+    "tsx"
   ],
   "author": "Leonardo Silveira <sombriks@gmail.com>",
   "license": "MIT",
@@ -42,6 +45,7 @@
     "koa-jwt": "^4.0.4",
     "signale": "^1.4.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   },
   "devDependencies": {
@@ -58,8 +62,10 @@
       "ts"
     ],
     "require": [
-      "dotenv-flow/config",
-      "ts-node/register"
+      "dotenv-flow/config"
+    ],
+    "nodeArguments": [
+      "--import=tsx"
     ]
   },
   "c8": {

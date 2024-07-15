@@ -47,7 +47,7 @@ export const noRollback = async (database: PGlite): Promise<MigrateResults> => {
 	}
 
 	// Add new migrate files here, in this array.
-	const files = ['app/configs/migrations/2024-07-13-start-schema.sql'];
+	const files = ['app/configs/migrations/2024-07-14-start-schema.sql'];
 	// Desired state for test suite
 	if (process.env.NODE_ENV === 'test') {
 		files.push('app/configs/migrations/3000-test-data.sql');

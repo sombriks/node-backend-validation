@@ -3,6 +3,9 @@ import {type PeopleServices, type PersonParameters, preparePeopleServices} from 
 import {type PhoneServices, preparePhonesServices} from '../services/phones';
 import {type Person} from '../models/person';
 import {type Phone} from '../models/phone';
+import {logger} from "../configs/logging";
+
+const log = logger.scope('controllers', 'people.ts');
 
 export type PeopleRequestsOptions = {
 	peopleServices: PeopleServices;
@@ -41,6 +44,7 @@ export const preparePeopleRequests = async (options?: PeopleRequestsOptions) => 
 	const {peopleServices, phonesServices} = options;
 	return {
 		async list(context: Context) {
+			log.info('list people');
 			context.body = await peopleServices.list(context.request.query);
 		},
 		async find(context: Context) {

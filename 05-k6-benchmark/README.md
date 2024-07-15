@@ -20,10 +20,10 @@ k6 run scenario-01.js
 
 All tests executed with initially empty database.
 
-| Compute             | Scenario   | No Validation | Manual Validation | Joi       | TS-Node |
-|---------------------|------------|---------------|-------------------|-----------|---------|
-| Mac M1 Air          | 30s / 10vu | 3447 reqs     | 2684 reqs         |           |         |
-| Intel Core i7-1255U | 30s / 10vu | 1463 reqs     | 1773 reqs         | 2491 reqs |         |
+| Compute             | Scenario   | No Validation | Manual Validation | Joi       | TS-Node   |
+|---------------------|------------|---------------|-------------------|-----------|-----------|
+| Mac M1 Air          | 30s / 10vu | 3447 reqs     | 2684 reqs         |           |           |
+| Intel Core i7-1255U | 30s / 10vu | 2470 reqs     | 2517 reqs         | 2531 reqs | 2543 reqs |
 
 ## Noteworthy
 
@@ -31,9 +31,9 @@ All tests executed with initially empty database.
   hit the database instead of perform some validation over the payload. I
   suspect it benefited from some form of cache, since we're talking about an
   [experimental database][pglite] supporting single connection.
-- Another interesting observation is how Joi validation performed better than
-  manual approach. Maybe we owe some credit to the use of dedicated middleware
-  too, but it's a result to explore in the future.
+- On i7 tests, repeated a few times, there was little variation, showing the IO
+  bound nature of the benchmark. But validation-enabled versions show a little
+  advantage over no-validation version.
 
 [go]: https://go.dev
 [k6]: https://grafana.com/docs/k6/latest/using-k6/http-requests

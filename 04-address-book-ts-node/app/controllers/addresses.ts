@@ -45,6 +45,7 @@ export const prepareAddressesRequests = async (options?: AddressesRequestsOption
 		async create(context) {
 			log.info('create address');
 			const {description, complement} = context.request.body as Address;
+			if(complement == undefined) return context.throw(400, `"complement" is required`);
 			const id = await addressesServices.create({address: {description, complement}});
 			context.status = 201;
 			context.set('Location', `/addresses/${id}`); // Politely guide clients to somewhere else
@@ -78,6 +79,8 @@ export const prepareAddressesRequests = async (options?: AddressesRequestsOption
 			async list(context) {
 				log.info('list people from address');
 				const {id: addresses_id} = context.params;
+				// TODO can type gymnastics solve this?
+				if(addresses_id < 0) return context.throw(400, 'id is invalid');
 				context.body = await addressesServices.people.list({addresses_id});
 			},
 			async add(context) {
