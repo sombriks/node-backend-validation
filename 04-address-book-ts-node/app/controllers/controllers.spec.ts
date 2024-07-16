@@ -1,16 +1,16 @@
 import test from 'ava';
 import request from 'supertest';
-import { testSetup, testTeardown } from '../configs/hook-test-context';
-import {Address} from "../models/address";
-import {Phone} from "../models/phone";
-import {Person} from "../models/person";
+import {testSetup, testTeardown} from '../configs/hook-test-context';
+import {type Address} from '../models/address';
+import {type Phone} from '../models/phone';
+import {type Person} from '../models/person';
 
 test.before(testSetup);
 
 test.after.always(testTeardown);
 
 test('should list addresses', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/addresses');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -19,7 +19,7 @@ test('should list addresses', async t => {
 });
 
 test('should search addresses - single result', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/addresses?q=horse');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -29,7 +29,7 @@ test('should search addresses - single result', async t => {
 });
 
 test('should search addresses - empty list', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/addresses?q=route%2066');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -38,7 +38,7 @@ test('should search addresses - empty list', async t => {
 });
 
 test('should find address', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/addresses/1');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -47,15 +47,15 @@ test('should find address', async t => {
 });
 
 test('should NOT find address', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/addresses/-1');
 	t.truthy(result);
 	t.is(result.status, 404);
 });
 
 test('should create address', async t => {
-	const address = { description: 'El Dorado Rd 113', complement: '' };
-	// @ts-ignore properly type context later
+	const address = {description: 'El Dorado Rd 113', complement: ''};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).post('/addresses').send(address);
 	t.truthy(result);
 	t.is(result.status, 201);
@@ -64,8 +64,8 @@ test('should create address', async t => {
 });
 
 test('should NOT create address due to invalid complement', async t => {
-	const address = { description: 'El Dorado Rd 113' /* complement: '' */ };
-	// @ts-ignore properly type context later
+	const address = {description: 'El Dorado Rd 113' /* complement: '' */};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).post('/addresses').send(address);
 	t.truthy(result);
 	t.is(result.status, 400);
@@ -73,8 +73,8 @@ test('should NOT create address due to invalid complement', async t => {
 });
 
 test('should update addresses', async t => {
-	const address = { description: 'Dead end street', complement: 'Uphill house' };
-	// @ts-ignore properly type context later
+	const address = {description: 'Dead end street', complement: 'Uphill house'};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).put('/addresses/2').send(address);
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -83,7 +83,7 @@ test('should update addresses', async t => {
 });
 
 test('should delete addresses', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).del('/addresses/5');
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -92,7 +92,7 @@ test('should delete addresses', async t => {
 });
 
 test('should list people living in address', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/addresses/1/people');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -101,7 +101,7 @@ test('should list people living in address', async t => {
 });
 
 test('should NOT list people due to invalid address', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/addresses/-1/people');
 	t.truthy(result);
 	t.is(result.status, 400);
@@ -109,7 +109,7 @@ test('should NOT list people due to invalid address', async t => {
 });
 
 test('should add people into address', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).put('/addresses/4/people/1');
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -118,7 +118,7 @@ test('should add people into address', async t => {
 });
 
 test('should remove people from address', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).del('/addresses/2/people/3');
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -127,7 +127,7 @@ test('should remove people from address', async t => {
 });
 
 test('should list people', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/people');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -136,7 +136,7 @@ test('should list people', async t => {
 });
 
 test('should find a person', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/people/1');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -145,8 +145,8 @@ test('should find a person', async t => {
 });
 
 test('should create people', async t => {
-	const person = { name: 'Ferdinand' };
-	// @ts-ignore properly type context later
+	const person = {name: 'Ferdinand'};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).post('/people').send(person);
 	t.truthy(result);
 	t.is(result.status, 201);
@@ -155,8 +155,8 @@ test('should create people', async t => {
 });
 
 test('should update people', async t => {
-	const person = { name: 'Donald' };
-	// @ts-ignore properly type context later
+	const person = {name: 'Donald'};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).put('/people/4').send(person);
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -165,7 +165,7 @@ test('should update people', async t => {
 });
 
 test('should delete people', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).del('/people/4');
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -174,7 +174,7 @@ test('should delete people', async t => {
 });
 
 test('should list people\'s phones', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/people/5/phones');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -183,7 +183,7 @@ test('should list people\'s phones', async t => {
 });
 
 test('should find people\'s phones', async t => {
-	// @ts-ignore properly type context later
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).get('/people/5/phones/3');
 	t.truthy(result);
 	t.is(result.status, 200);
@@ -192,8 +192,8 @@ test('should find people\'s phones', async t => {
 });
 
 test('should create people\'s phone', async t => {
-	const phone = { number: '55555' };
-	// @ts-ignore properly type context later
+	const phone = {number: '55555'};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).post('/people/5/phones').send(phone);
 	t.truthy(result);
 	t.is(result.status, 201);
@@ -203,8 +203,8 @@ test('should create people\'s phone', async t => {
 });
 
 test('should update people\'s phone', async t => {
-	const phone = { number: '77771111' };
-	// @ts-ignore properly type context later
+	const phone = {number: '77771111'};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).put('/people/5/phones/3').send(phone);
 	t.truthy(result);
 	t.is(result.status, 303);
@@ -213,8 +213,8 @@ test('should update people\'s phone', async t => {
 });
 
 test('should delete people\'s phone', async t => {
-	const phone = { number: '77771111' };
-	// @ts-ignore properly type context later
+	const phone = {number: '77771111'};
+	// @ts-expect-error properly type context later
 	const result = await request(t.context.app.callback()).del('/people/2/phones/2').send(phone);
 	t.truthy(result);
 	t.is(result.status, 303);

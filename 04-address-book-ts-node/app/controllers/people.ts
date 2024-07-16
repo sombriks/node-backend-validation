@@ -3,7 +3,7 @@ import {type PeopleServices, type PersonParameters, preparePeopleServices} from 
 import {type PhoneServices, preparePhonesServices} from '../services/phones';
 import {type Person} from '../models/person';
 import {type Phone} from '../models/phone';
-import {logger} from "../configs/logging";
+import {logger} from '../configs/logging';
 
 const log = logger.scope('controllers', 'people.ts');
 
@@ -57,7 +57,7 @@ export const preparePeopleRequests = async (options?: PeopleRequestsOptions) => 
 		},
 		async create(context: Context) {
 			const person = context.request.body as Person;
-			const id = await peopleServices.create({person});
+			const id: number = await peopleServices.create({person});
 			context.status = 201;
 			context.set('Location', `/people/${id}`);
 			context.body = {message: `#${id} created`};
@@ -65,7 +65,7 @@ export const preparePeopleRequests = async (options?: PeopleRequestsOptions) => 
 		async update(context: Context) {
 			const {id} = context.params as Person;
 			const person = context.request.body as Person;
-			const affected = await peopleServices.update({id, person});
+			const affected: number 							= await peopleServices.update({id, person});
 			context.status = 303;
 			context.set('Location', `/people/${id}`);
 			context.body = {message: `${affected} updated`};
